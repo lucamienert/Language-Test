@@ -4,11 +4,11 @@ import sys
 filename = sys.argv[1]
 
 def main():
-    if filename.endswith('.luma'):
+    if filename.endswith('.rbl'):
         with open(filename, 'r') as file:
             data = file.read()
     else:
-        print('File must end with ".luma"')
+        print('File must end with ".rbl"')
         exit()
 
     result, error = run.run('<stdin>', data)
