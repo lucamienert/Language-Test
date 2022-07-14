@@ -1,9 +1,6 @@
 import run as run
-import sys
 
-filename = sys.argv[1]
-
-def main():
+def main(filename):
     if filename.endswith('.rbl'):
         with open(filename, 'r') as file:
             data = file.read()
@@ -20,6 +17,3 @@ def main():
             print(repr(result.elements[0]))
         else:
             print(repr(result))
-
-if __name__ == '__main__':
-    main()

@@ -177,10 +177,12 @@ class Interpreter:
         elements = []
 
         start_value = res.register(self.visit(node.start_value_node, context))
-        if res.should_return(): return res
+        if res.should_return(): 
+            return res
 
         end_value = res.register(self.visit(node.end_value_node, context))
-        if res.should_return(): return res
+        if res.should_return(): 
+            return res
 
         if node.step_value_node:
             step_value = res.register(self.visit(node.step_value_node, context))
@@ -201,7 +203,8 @@ class Interpreter:
             i += step_value.value
 
             value = res.register(self.visit(node.body_node, context))
-            if res.should_return() and res.loop_should_continue == False and res.loop_should_break == False: return res
+            if res.should_return() and res.loop_should_continue == False and res.loop_should_break == False: 
+                return res
             
             if res.loop_should_continue:
                 continue
@@ -228,7 +231,8 @@ class Interpreter:
                 break
 
             value = res.register(self.visit(node.body_node, context))
-            if res.should_return() and res.loop_should_continue == False and res.loop_should_break == False: return res
+            if res.should_return() and res.loop_should_continue == False and res.loop_should_break == False: 
+                return res
 
             if res.loop_should_continue:
                 continue
@@ -261,15 +265,20 @@ class Interpreter:
         args = []
 
         value_to_call = res.register(self.visit(node.node_to_call, context))
-        if res.should_return(): return res
+        if res.should_return(): 
+            return res
+
         value_to_call = value_to_call.copy().set_pos(node.pos_start, node.pos_end)
 
         for arg_node in node.arg_nodes:
             args.append(res.register(self.visit(arg_node, context)))
-            if res.should_return(): return res
+            if res.should_return(): 
+                return res
 
         return_value = res.register(value_to_call.execute(args))
-        if res.should_return(): return res
+        if res.should_return(): 
+            return res
+
         return_value = return_value.copy().set_pos(node.pos_start, node.pos_end).set_context(context)
         return res.success(return_value)
 
@@ -278,7 +287,8 @@ class Interpreter:
 
         if node.node_to_return:
             value = res.register(self.visit(node.node_to_return, context))
-            if res.should_return(): return res
+            if res.should_return(): 
+                return res
         else:
             value = Number.null
         

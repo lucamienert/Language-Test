@@ -1,11 +1,7 @@
 from error import IllegalCharError, ExpectedCharError
 from position import Position
 from token import Token, Tokens
-import string
-
-DIGITS = '0123456789'
-LETTERS = string.ascii_letters
-LETTERS_DIGITS = LETTERS + DIGITS
+from constants import DIGITS, LETTERS, LETTERS_DIGITS
 
 class Lexer:
     def __init__(self, fn, text):
@@ -64,7 +60,8 @@ class Lexer:
                 self.advance()
             elif self.current_char == '!':
                 token, error = self.make_not_equals()
-                if error: return [], error
+                if error: 
+                    return [], error
                 tokens.append(token)
             elif self.current_char == '=':
                 tokens.append(self.make_equals())
